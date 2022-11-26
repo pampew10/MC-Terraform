@@ -10,7 +10,7 @@ terraform {
 variable "gcp_region" {
   type        = string
   description = "Region to use for GCP provider"
-  default     = "us-west4"
+  default     = "us-central1"
 }
 
 variable "gcp_project" {
