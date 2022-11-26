@@ -67,5 +67,5 @@ resource "google_compute_firewall" "allow_http" {
 }
 
 output "public_ip_address" {
-  value = google_compute_address.static.address
+  value = google_compute_instance.default.network_interface.0.public_ip
 }
