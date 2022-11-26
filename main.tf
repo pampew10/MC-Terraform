@@ -25,10 +25,6 @@ provider "google" {
 
 data "google_compute_zones" "available_zones" {}
 
-resource "google_compute_address" "static" {
-  name = "apache"
-}
-
 resource "google_compute_instance" "apache" {
   name = "apache"
   zone = data.google_compute_zones.available_zones.names[0]
@@ -66,6 +62,6 @@ resource "google_compute_firewall" "allow_http" {
   
 }
 
-output "public_ip_address" {
-  value = "google_compute_instance.default.network_interface.0.access_config.0.nat_ip"
+output "ip" {
+  value = "${google_compute_instance.default[*].network_interface.0.access_config.0.nat_ip}"
 }
