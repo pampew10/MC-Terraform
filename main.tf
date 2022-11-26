@@ -10,7 +10,7 @@ terraform {
 variable "gcp_region" {
   type        = string
   description = "Region to use for GCP provider"
-  default     = "us-west1"
+  default     = "us-central1"
 }
 
 variable "gcp_project" {
@@ -26,13 +26,13 @@ provider "google" {
 data "google_compute_zones" "available_zones" {}
 
 resource "google_compute_address" "static" {
-  name = "mcserver"
+  name = "apache"
 }
 
-resource "google_compute_instance" "mcserver" {
-  name = "mcserver"
+resource "google_compute_instance" "apache" {
+  name = "apache"
   zone = data.google_compute_zones.available_zones.names[0]
-  tags = ["allow-minecraft"]
+  tags = ["allow-http"]
 
   machine_type = "e2-micro"
 
@@ -58,11 +58,11 @@ resource "google_compute_firewall" "allow_http" {
     network = "default"
     
     allow {
-      ports = ["25565"]
+      ports = ["80"]
       protocol = "tcp"
     }
 
-    target_tags = ["allow-minecraft"]
+    target_tags = ["allow-http"]
 
     priority = 1000
   
