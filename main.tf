@@ -58,7 +58,7 @@ resource "google_compute_firewall" "allow_http" {
     network = "default"
     
     allow {
-      ports = ["80"]
+      ports = ["52565"]
       protocol = "tcp"
     }
 
