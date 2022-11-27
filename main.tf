@@ -28,7 +28,7 @@ data "google_compute_zones" "available_zones" {}
 resource "google_compute_instance" "apache" {
   name = "apache"
   zone = data.google_compute_zones.available_zones.names[0]
-  tags = ["allow-http"]
+  tags = ["allow-minecraft"]
 
   machine_type = "e2-micro"
 
@@ -48,15 +48,15 @@ resource "google_compute_instance" "apache" {
 }
 
 resource "google_compute_firewall" "allow_http" {
-    name = "allow-http-rule"
+    name = "allow-minecraft-rule"
     network = "default"
     
     allow {
-      ports = ["80"]
+      ports = ["25565"]
       protocol = "tcp"
     }
 
-    target_tags = ["allow-http"]
+    target_tags = ["allow-minecraft"]
 
     priority = 1000
   
