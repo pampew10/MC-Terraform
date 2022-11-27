@@ -25,8 +25,8 @@ provider "google" {
 
 data "google_compute_zones" "available_zones" {}
 
-resource "google_compute_instance" "apache" {
-  name = "apache"
+resource "google_compute_instance" "mcserver" {
+  name = "mcserver"
   zone = data.google_compute_zones.available_zones.names[0]
   tags = ["allow-minecraft"]
 
@@ -63,5 +63,5 @@ resource "google_compute_firewall" "allow_http" {
 }
 
 output "ip" {
-  value = "${google_compute_instance.apache[*].network_interface.0.access_config.0.nat_ip}"
+  value = "${google_compute_instance.mcserver[*].network_interface.0.access_config.0.nat_ip}"
 }
