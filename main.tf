@@ -48,7 +48,7 @@ resource "google_compute_instance" "mcserver" {
 }
 
 resource "google_compute_firewall" "allow_http-egress" {
-    name = "allow-minecraft-rule"
+    name = "allow-minecraft-egress"
     network = "default"
     direction = "EGRESS"
   
@@ -64,7 +64,7 @@ resource "google_compute_firewall" "allow_http-egress" {
   
 }
 resource "google_compute_firewall" "allow_http-ingress" {
-    name = "allow-minecraft-rule"
+    name = "allow-minecraft-ingress"
     network = "default"
     direction = "INGRESS"
   
