@@ -30,7 +30,7 @@ resource "google_compute_instance" "mcserver" {
   zone = data.google_compute_zones.available_zones.names[0]
   tags = ["allow-minecraft"]
 
-  machine_type = "e2-micro"
+  machine_type = "e2-small"
 
   boot_disk {
     initialize_params {
