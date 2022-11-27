@@ -47,10 +47,28 @@ resource "google_compute_instance" "mcserver" {
   metadata_startup_script = file("startup_script.sh")
 }
 
-resource "google_compute_firewall" "allow_http" {
+resource "google_compute_firewall" "allow_http-egress" {
     name = "allow-minecraft-rule"
     network = "default"
-    
+    direction = "EGRESS"
+  
+  
+    allow {
+      ports = ["25565"]
+      protocol = "tcp"
+    }
+
+    target_tags = ["allow-minecraft"]
+
+    priority = 1000
+  
+}
+resource "google_compute_firewall" "allow_http-ingress" {
+    name = "allow-minecraft-rule"
+    network = "default"
+    direction = "INGRESS"
+  
+  
     allow {
       ports = ["25565"]
       protocol = "tcp"
