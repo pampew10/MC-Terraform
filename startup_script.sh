@@ -2,6 +2,8 @@
 
 sudo apt update
 sudo apt -y install openjdk-8-jre-headless
+apt-get install nagios-plugins nagios-nrpe-server
+wait
 
 sudo useradd -r -m -U -d /opt/minecraft -s /bin/bash minecraft
 
