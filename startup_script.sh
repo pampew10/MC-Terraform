@@ -7,6 +7,8 @@ sudo useradd -r -m -U -d /opt/minecraft -s /bin/bash minecraft
 
 sudo su - minecraft
 
+cd /opt/minecraft
+
 mkdir -p ~/{backups,tools,server}
 
 wget https://launcher.mojang.com/v1/objects/ed76d597a44c5266be2a7fcd77a8270f1f0bc118/server.jar -P ~/server
