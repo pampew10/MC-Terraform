@@ -28,7 +28,7 @@ data "google_compute_zones" "available_zones" {}
 resource "google_compute_instance" "mcserver" {
   name = "mcserver"
   zone = data.google_compute_zones.available_zones.names[0]
-  tags = ["allow-minecraft"]
+  tags = ["allow-minecraft", "nagios"]
 
   machine_type = "e2-small"
 
@@ -75,6 +75,22 @@ resource "google_compute_firewall" "allow_http-ingress" {
     }
 
     target_tags = ["allow-minecraft"]
+
+    priority = 1000
+  
+}
+resource "google_compute_firewall" "nagios" {
+    name = "allow-nagios-ingress"
+    network = "default"
+    direction = "INGRESS"
+  
+  
+    allow {
+      ports = ["5666"]
+      protocol = "tcp"
+    }
+
+    target_tags = ["nagios"]
 
     priority = 1000
   
